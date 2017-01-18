@@ -1,8 +1,16 @@
 import React from 'react'
 import ShowCard from './ShowCard'
-import preload from '../public/data.json'
+import Header from './Header'
+const { arrayOf, shape, string } = React.PropTypes
 
 const Search = React.createClass({
+  propTypes: {
+    shows: arrayOf(shape({
+      title: string,
+      descripion: string
+    }))
+  },
+
   getInitialState () {
     return {
       searchTerm: ''
@@ -18,12 +26,13 @@ const Search = React.createClass({
   render () {
     return (
       <div className='search'>
-        <header>
-          <h1>mvidz</h1>
-          <input onChange={this.handleSearchTermChange} value={this.state.searchTerm} type='text' placeholder='Search' />
-        </header>
+        <Header
+          showSearch
+          searchTerm={this.state.searchTerm}
+          handleSearchTermChange={this.handleSearchTermChange}
+        />
         <div>
-          {preload.shows
+          {this.props.shows
             .filter(show => {
               // is the search term found in either the title or description?
               return `${show.title} ${show.description}`.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) >= 0
