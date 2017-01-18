@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack-dev-server",
-    "lint": "eslint js/**/*.js webpack.config.js"
+    "lint": "eslint js/**/*.js webpack.config.js",
+    "start": "webpack-dev-server"
   },
   "dependencies": {
     "axios": "0.15.2",
