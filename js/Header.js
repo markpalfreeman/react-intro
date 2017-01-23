@@ -1,12 +1,24 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { setSearchTerm } from './actionCreators'
 import { Link } from 'react-router'
 
 class Header extends React.Component {
+  constructor (props) {
+    super(props) // call parent's constructor with (props)
+
+    this.handleSearchTermChange = this.handleSearchTermChange.bind(this)
+  }
+
+  handleSearchTermChange (event) {
+    this.props.dispatch(setSearchTerm(event.target.value))
+  }
+
   render () {
     let utility
     if (this.props.showSearch) {
       utility = (
-        <input onChange={this.props.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
+        <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
       )
     } else {
       utility = (
@@ -29,9 +41,15 @@ class Header extends React.Component {
 
 const { func, bool, string } = React.PropTypes
 Header.propTypes = {
-  handleSearchTermChange: func,
+  dispatch: func, // prop comes from 'connect'
   showSearch: bool,
   searchTerm: string
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    searchTerm: state.searchTerm
+  }
+}
+
+export default connect(mapStateToProps)(Header)
