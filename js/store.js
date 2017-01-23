@@ -5,7 +5,7 @@ import rootReducer from './reducers'
 const store = createStore(rootReducer, compose(
   applyMiddleware(thunk),
   // this simply allows for Redux devtools
-  typeof window === 'object' && typeof window.devToolsExtension !== undefined
+  typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
     ? window.devToolsExtension()
     : (f) => f
 ))

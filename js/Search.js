@@ -41,4 +41,6 @@ const mapStateToProps = (state) => {
   }
 }
 
+export const UnwrappedSearch = Search // for testing
+
 export default connect(mapStateToProps)(Search)
